@@ -1,4 +1,5 @@
-import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+import confetti from "canvas-confetti";
+
 var apiRes;
 var answer;
 var guessNumber = 0;
