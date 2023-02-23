@@ -20,10 +20,8 @@ fetch (file)
 
 function prepGame(data){
     apiRes = data;
-    console.log(apiRes);
     document.getElementById("lyric-block").innerHTML = data.quote;
     answer = data.song.toLowerCase();
-    console.log(answer);
 }
 
 function submitGuess(){
