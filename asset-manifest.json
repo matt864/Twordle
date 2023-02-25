@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/twordle/static/css/main.a7fe0d43.css",
+    "main.js": "/twordle/static/js/main.84caec55.js",
+    "index.html": "/twordle/index.html",
+    "main.a7fe0d43.css.map": "/twordle/static/css/main.a7fe0d43.css.map",
+    "main.84caec55.js.map": "/twordle/static/js/main.84caec55.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a7fe0d43.css",
+    "static/js/main.84caec55.js"
+  ]
+}
