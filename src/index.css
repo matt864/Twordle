@@ -17,6 +17,7 @@ body {
 #container{
   max-width: 400px;
   margin: auto;
+  min-height: 100vh;
 }
 #header{
   width:100%;
@@ -42,7 +43,6 @@ h2{
   text-align: center;
   font-size:18px;
   margin:0px;
-  margin-bottom: 20px;
 }
 h3{
   margin: 0px;
@@ -54,7 +54,6 @@ h3{
   margin-bottom: 20px;
   border:3px solid var(--primary);
   border-radius: 18px;
-  text-decoration: underline;
 }
 #guess-score-block{
   display: flex;
@@ -65,7 +64,7 @@ h3{
 }
 .bordered{
   border: var(--primary) 3px solid;
-  border-radius:50px;
+  border-radius:20px;
 }
 .guess-score-widget{
   display: block;
@@ -97,6 +96,10 @@ input{
   background-position: 0%;
   background-position-x: center;
 }
+.container{
+  height:auto;
+  margin-bottom: 20px;
+}
 #answer{
   padding:3%;
 }
@@ -108,7 +111,7 @@ input:focus{
   background-color: white;
   line-height: 40px;
   color:#38A2D7;
-  border-radius: 0px 30px 30px 0px;
+  border-radius: 0px 16px 16px 0px;
 }
 #previous-guess-block{
   width:100%;

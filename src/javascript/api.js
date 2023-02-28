@@ -61,7 +61,12 @@ function incorrectGuess(guess){
 function loseGame(){
     document.getElementById("answer").innerHTML = "😥 " + apiRes.song + " 😥";
 }
+
+function clearInput(){
+    document.getElementById("input").value = "";
+}
 export {
     submitGuess,
     skipGuess,
+    clearInput
   }

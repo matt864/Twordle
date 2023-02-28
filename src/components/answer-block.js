@@ -1,5 +1,7 @@
 function AnswerBlock() {
-    return <h2 id="answer" className="bordered shadow">🤔</h2>;
+    return <div className="bordered shadow container">
+    <h2 id="answer">🤔</h2>
+    </div>;
   }
   
   export default AnswerBlock;
