@@ -1,63 +1,90 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abyssinica+SIL&display=swap');
 
 :root{
-  --primary: #C4BDBD;
+  --primary: white;
 }
 
 body {
   margin: 0;
-  font-family: 'Limelight', cursive;
+  font-family: 'Abyssinica SIL', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #252424;
+  background: linear-gradient(167.97deg, #38A2D7 -25.54%, #561139 122.57%);
   color:white;
-  padding:2% 10%;
+  padding:5% 5%;
 }
 #container{
   max-width: 400px;
   margin: auto;
+  min-height: 100vh;
+}
+#header{
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12%;
+  margin-bottom:20px;
 }
 h1{
   color: white;
   font-size:24px;
-  text-align: center;
-  margin: 1% auto;
+  text-align: left;
+  margin:0px;
   width:auto;
+}
+#skip-button{
+  width:30px;
+  height:30px;
+  align-self: center;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 h2{
   text-align: center;
-  font-size:24px;
-
+  font-size:18px;
+  margin:0px;
+}
+h3{
+  margin: 0px;
 }
 #lyric-block {
-  font-size:24px;
+  font-size:18px;
+  padding:5% 10%;
+  margin: 0px;
+  margin-bottom: 20px;
+  border:3px solid var(--primary);
+  border-radius: 18px;
 }
 #guess-score-block{
   display: flex;
   justify-content: space-between;
-  height: auto;
-  padding: 5% 0%;
+  height: 30px;
+  margin-bottom: 20px;
   gap: 0px;
 }
 .bordered{
   border: var(--primary) 3px solid;
-  border-radius:50px;
+  border-radius:20px;
 }
 .guess-score-widget{
   display: block;
-  width:40px;
-  height:40px;
+  width:20px;
+  height:20px;
+  border-radius: 10px!important;
 }
 #input-holder{
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  height:40px;
+  margin-bottom: 20px;
 }
 input{
   background-color: transparent;
   height:auto;
-  width: 48.85%;
-  padding-left: 5%;
+  font-family: 'Abyssinica SIL', serif;
+  border:0px;
+  width:85%;
+  margin: 0% 7.5%;
   color:white;
 }
 .button{
@@ -69,27 +96,31 @@ input{
   background-position: 0%;
   background-position-x: center;
 }
+.container{
+  height:auto;
+  margin-bottom: 20px;
+}
+#answer{
+  padding:3%;
+}
 input:focus{
   outline: none;
 }
 #submit-answer{
-  background-image: url("/public/tick.png");
-}
-#skip-answer{
-  background-image: url("/public/skip.png");
+  text-align: center;
+  background-color: white;
+  line-height: 40px;
+  color:#38A2D7;
+  border-radius: 0px 16px 16px 0px;
 }
 #previous-guess-block{
   width:100%;
-  border: 3px var(--primary) solid;
   display: grid;
   grid-template-columns: 100%;
   border-radius: 10px;
-  margin:5% 0%;
 }
 .shadow{
-  -webkit-box-shadow: 10px 10px 15px 0px rgba(0,0,0,1);
-  -moz-box-shadow: 10px 10px 15px 0px rgba(0,0,0,1);
-  box-shadow: 10px 10px 15px 0px rgba(0,0,0,1);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .shadow > div{
   -webkit-box-shadow: 0px;
