@@ -118,6 +118,9 @@ input:focus{
   color:#38A2D7;
   border-radius: 0px 16px 16px 0px;
 }
+#submit-answer:hover{
+  cursor: pointer;
+}
 #previous-guess-block{
   width:100%;
   display: grid;

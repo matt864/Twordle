@@ -24,13 +24,26 @@ function prepGame(data){
     apiRes = data;
     console.log(apiRes);
     var lyricArr = data.quote.split(" ");
-    var tenPerCentStringLength = Math.floor(lyricArr.length *0.1)||1;
-    constructHTMLStrings(lyricArr,tenPerCentStringLength);
+    constructHTMLStrings(lyricArr);
     answer = data.song.toLowerCase();
-    showLevel()
+    showLevel();
 }
 function showLevel(){
-    displayStrings.map((elem) => {document.getElementById("lyric-block").innerHTML+=(elem +" ")})
+    var levelone = Math.floor(displayStrings.length * 0.5);
+    var leveltwo = Math.floor(displayStrings.length * 0.65);
+    var levelthree = Math.floor(displayStrings.length * 0.75);
+    var levelfour = Math.floor(displayStrings.length * 0.9);
+    var levelcounts = [levelone,leveltwo,levelthree,levelfour,displayStrings.length];
+        var tobedisplayednumber = levelcounts[guessNumber];
+        console.log("To be displayed words : " + tobedisplayednumber);
+        console.log("Actual displayed words : " + document.getElementsByClassName("displayed").length);
+        while(tobedisplayednumber>document.getElementsByClassName("displayed").length){
+            var hiddenitems =  document.getElementsByClassName("hidden");
+            var randomItem = hiddenitems[Math.floor(Math.random()*hiddenitems.length)];
+            randomItem.removeAttribute("class");
+            randomItem.setAttribute("class","displayed");
+    }
+    console.log("------------------");
 }
 function submitGuess(){
     let guess = String(document.getElementById("input").value).toString().toLowerCase();
@@ -57,13 +70,18 @@ function winGame(){
 }
 
 function incorrectGuess(guess){
-    document.getElementsByClassName("previous-guess")[guessNumber].innerHTML=guess;
+    var guessToInput = guess;
+    if(guessToInput==="Guess the song..."){guessToInput="SKIPPED"};
+    document.getElementsByClassName("previous-guess")[guessNumber].innerHTML=guessToInput;
     document.getElementsByClassName("guess-score-widget")[guessNumber].style.backgroundColor = "red";
     if(guessNumber===4){
         loseGame()
         return
     }
-    guessNumber++;
+    else{
+        guessNumber++;
+        showLevel();
+    }
 }
 function loseGame(){
     document.getElementById("answer").innerHTML = "😥 " + apiRes.song + " 😥";
@@ -72,20 +90,11 @@ function loseGame(){
 function clearInput(){
     document.getElementById("input").value = "";
 }
-function constructHTMLStrings(arrayOfWords,tenPercent){
-    var startingWeight = tenPercent*4;
+function constructHTMLStrings(arrayOfWords){
    for (let i=0;i<arrayOfWords.length;i++){
-    displayStrings.push("<span class='displayed'>" + arrayOfWords[i] + "</span>");
+    displayStrings.push("<span class='hidden'>" + arrayOfWords[i] + "</span>");
    }
-
-for (let i=0;i<startingWeight;i++){
-    var randomNumber = Math.floor(Math.random()*displayStrings.length);
-    var randomItem = displayStrings[randomNumber];
-    if(randomItem.search(">/<")===-1&&randomItem.search("class='hidden'")===-1){
-        displayStrings.splice(randomNumber,1,randomItem.replace("<span class='displayed'>","<span class='hidden'>"))
-    }
-   }
-   console.log(displayStrings);
+   displayStrings.map((elem) => {document.getElementById("lyric-block").innerHTML+=(elem +" ")});
 }
 export {
     submitGuess,
