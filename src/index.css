@@ -104,6 +104,7 @@ input{
 .container{
   height:auto;
   margin-bottom: 20px;
+  border-radius: 18px;
 }
 #answer{
   padding:3%;

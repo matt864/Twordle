@@ -46,6 +46,10 @@ function showLevel(){
 }
 function submitGuess(){
     let guess = String(document.getElementById("input").value).toString().toLowerCase();
+    var lastcharofguess = guess.substr(guess.length - 1);
+    if(lastcharofguess===" "){
+        guess = guess.slice(0,-1);
+    }
     if(guess===answer){
         winGame()
     }
@@ -70,7 +74,7 @@ function winGame(){
 
 function incorrectGuess(guess){
     var guessToInput = guess;
-    if(guessToInput==="Guess the song..."){guessToInput="SKIPPED"};
+    if(guessToInput==="Guess the song..."||guessToInput===""||guessToInput===" "){guessToInput="SKIPPED"};
     document.getElementsByClassName("previous-guess")[guessNumber].innerHTML=guessToInput;
     document.getElementsByClassName("guess-score-widget")[guessNumber].style.backgroundColor = "red";
     if(guessNumber===4){
@@ -90,7 +94,6 @@ function clearInput(){
     document.getElementById("input").value = "";
 }
 function constructHTMLStrings(){
-    console.log(lyricArr);
    for (let i=0;i<lyricArr.length;i++){
     var hiddenText = "";
     for(let p=0;p<lyricArr[i].length;p++){
