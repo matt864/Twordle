@@ -4,7 +4,11 @@
 :root{
   --primary: white;
 }
-
+.hidden{
+color: transparent !important;
+text-decoration: underline;
+text-decoration-color: var(--primary);
+}
 body {
   margin: 0;
   font-family: 'Abyssinica SIL', serif;
@@ -52,6 +56,7 @@ h3{
   padding:5% 10%;
   margin: 0px;
   margin-bottom: 20px;
+  overflow-wrap: anywhere;
   border:3px solid var(--primary);
   border-radius: 18px;
 }
@@ -113,6 +118,9 @@ input:focus{
   color:#38A2D7;
   border-radius: 0px 16px 16px 0px;
 }
+#submit-answer:hover{
+  cursor: pointer;
+}
 #previous-guess-block{
   width:100%;
   display: grid;
@@ -120,7 +128,7 @@ input:focus{
   border-radius: 10px;
 }
 .shadow{
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow:0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .shadow > div{
   -webkit-box-shadow: 0px;

@@ -1,5 +1,5 @@
 function LyricBlockJS(props) {
-    return <div className="container shadow"><p id="lyric-block"></p></div>;
+    return <div className="container shadow"><div id="lyric-block"></div></div>;
   }
   
   export default LyricBlockJS;
