@@ -4,6 +4,7 @@ var apiRes;
 var answer;
 var guessNumber = 0;
 var displayStrings = [];
+var lyricArr = [];
 
 window.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
@@ -22,8 +23,7 @@ fetch (file)
 
 function prepGame(data){
     apiRes = data;
-    console.log(apiRes);
-    var lyricArr = data.quote.split(" ");
+    lyricArr = data.quote.split(" ");
     constructHTMLStrings(lyricArr);
     answer = data.song.toLowerCase();
     showLevel();
@@ -35,15 +35,14 @@ function showLevel(){
     var levelfour = Math.floor(displayStrings.length * 0.9);
     var levelcounts = [levelone,leveltwo,levelthree,levelfour,displayStrings.length];
         var tobedisplayednumber = levelcounts[guessNumber];
-        console.log("To be displayed words : " + tobedisplayednumber);
-        console.log("Actual displayed words : " + document.getElementsByClassName("displayed").length);
         while(tobedisplayednumber>document.getElementsByClassName("displayed").length){
             var hiddenitems =  document.getElementsByClassName("hidden");
-            var randomItem = hiddenitems[Math.floor(Math.random()*hiddenitems.length)];
+            var randomNumber = Math.floor(Math.random()*hiddenitems.length);
+            var randomItem = hiddenitems[randomNumber];
             randomItem.removeAttribute("class");
             randomItem.setAttribute("class","displayed");
+            randomItem.innerHTML = lyricArr[randomItem.getAttribute("data-index")];
     }
-    console.log("------------------");
 }
 function submitGuess(){
     let guess = String(document.getElementById("input").value).toString().toLowerCase();
@@ -90,9 +89,14 @@ function loseGame(){
 function clearInput(){
     document.getElementById("input").value = "";
 }
-function constructHTMLStrings(arrayOfWords){
-   for (let i=0;i<arrayOfWords.length;i++){
-    displayStrings.push("<span class='hidden'>" + arrayOfWords[i] + "</span>");
+function constructHTMLStrings(){
+    console.log(lyricArr);
+   for (let i=0;i<lyricArr.length;i++){
+    var hiddenText = "";
+    for(let p=0;p<lyricArr[i].length;p++){
+        hiddenText+="*";
+    }
+    displayStrings.push("<span class='hidden' data-index=" + i + ">" + hiddenText + "</span>");
    }
    displayStrings.map((elem) => {document.getElementById("lyric-block").innerHTML+=(elem +" ")});
 }
