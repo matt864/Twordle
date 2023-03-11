@@ -138,9 +138,10 @@ function alreadyCompletedDisplay(completedOnGuess){
     else{
         document.getElementById("answer").innerHTML =  "😥 " + apiRes.song + " 😥";
         var buttons = document.getElementsByClassName("guess-score-widget");
-        for(let i=0;i<(guessNumber);i++){
+        for(let i=0;i<buttons.length;i++){
             buttons[i].style.backgroundColor = "red";
         }
+        document.getElementById("lyric-block").innerHTML = apiRes.quote;
     }
     document.getElementById("previous-guess-block").style.display = "none";
     document.getElementById("skip-button").style.display="block";
