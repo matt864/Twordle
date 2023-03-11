@@ -18,7 +18,7 @@ window.addEventListener("keypress", function(event) {
     }
   });
 
-window.addEventListener("load",prepGame());
+window.addEventListener("load",prepGame);
 
 function prepGame(){
     window.setTimeout(function(){
