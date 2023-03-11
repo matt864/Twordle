@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/twordle/static/css/main.fa700d80.css",
-    "main.js": "/twordle/static/js/main.30386cad.js",
+    "main.js": "/twordle/static/js/main.8dbb45e2.js",
     "index.html": "/twordle/index.html",
     "main.fa700d80.css.map": "/twordle/static/css/main.fa700d80.css.map",
-    "main.30386cad.js.map": "/twordle/static/js/main.30386cad.js.map"
+    "main.8dbb45e2.js.map": "/twordle/static/js/main.8dbb45e2.js.map"
   },
   "entrypoints": [
     "static/css/main.fa700d80.css",
-    "static/js/main.30386cad.js"
+    "static/js/main.8dbb45e2.js"
   ]
 }
