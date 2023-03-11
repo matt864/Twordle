@@ -1,10 +1,12 @@
 import confetti from "canvas-confetti";
+import readyToGo from "./database";
 
 var apiRes;
 var answer;
 var guessNumber = 0;
 var displayStrings = [];
 var lyricArr = [];
+var todayDateKey;
 
 window.addEventListener("keypress", function(event) {
     // If the user presses the "Enter" key on the keyboard
@@ -16,32 +18,33 @@ window.addEventListener("keypress", function(event) {
     }
   });
 
-let file = "https://taylorswiftapi.onrender.com/get";
-fetch (file)
-.then(x => x.json())
-.then(t => prepGame(t));
+window.addEventListener("load",prepGame());
 
-function prepGame(data){
-    apiRes = data;
-    lyricArr = data.quote.split(" ");
-    constructHTMLStrings(lyricArr);
-    answer = data.song.toLowerCase();
-    showLevel();
+function prepGame(){
+    window.setTimeout(function(){
+        todayDateKey = new Date().toISOString().split("T")[0];
+        const alreadyCompleted = localStorage.getItem("twordle-completed-on-" + todayDateKey);
+        const data = readyToGo[todayDateKey];
+        apiRes = data;
+        lyricArr = data.quote.split(" ");
+        answer = data.song.toLowerCase();
+        if(alreadyCompleted===null){
+            localStorage.clear();
+        constructHTMLStrings();
+        }
+        else{
+            alreadyCompletedDisplay(alreadyCompleted);
+        }
+    },1)
 }
 function showLevel(){
-    var levelone = Math.floor(displayStrings.length * 0.5);
-    var leveltwo = Math.floor(displayStrings.length * 0.65);
-    var levelthree = Math.floor(displayStrings.length * 0.75);
-    var levelfour = Math.floor(displayStrings.length * 0.9);
-    var levelcounts = [levelone,leveltwo,levelthree,levelfour,displayStrings.length];
-        var tobedisplayednumber = levelcounts[guessNumber];
-        while(tobedisplayednumber>document.getElementsByClassName("displayed").length){
-            var hiddenitems =  document.getElementsByClassName("hidden");
-            var randomNumber = Math.floor(Math.random()*hiddenitems.length);
-            var randomItem = hiddenitems[randomNumber];
-            randomItem.removeAttribute("class");
-            randomItem.setAttribute("class","displayed");
-            randomItem.innerHTML = lyricArr[randomItem.getAttribute("data-index")];
+    var words = document.getElementsByClassName("word");
+    var displayArr = apiRes.levels[guessNumber];
+    for(let i=0;i<displayArr.length;i++){
+        var wordToDisplay = words[displayArr[i]];
+        wordToDisplay.removeAttribute("class");
+        wordToDisplay.setAttribute("class","displayed word");
+        wordToDisplay.innerHTML = lyricArr[displayArr[i]];
     }
 }
 function submitGuess(){
@@ -59,7 +62,14 @@ function submitGuess(){
 }
 
 function skipGuess(){
-window.location.reload()
+    var guesses = document.getElementsByClassName("guess-score-widget");
+    var emojiString = "";
+    for(let i=0;i<guesses.length;i++){
+        if(guesses[i].style.backgroundColor === "red"){emojiString+="🟥"}
+        if(guesses[i].style.backgroundColor === "green"){emojiString+="🟩"; break};
+    }
+    navigator.clipboard.writeText(emojiString);
+    alert("Copied : " + emojiString);
 }
 
 function winGame(){
@@ -70,7 +80,9 @@ function winGame(){
         spread: 70,
         origin: { y: 0.6 }
       });
-}
+      localStorage.setItem("twordle-completed-on-" + todayDateKey, guessNumber);
+      document.getElementById("skip-button").style.display="block";
+    }
 
 function incorrectGuess(guess){
     var guessToInput = guess;
@@ -88,6 +100,8 @@ function incorrectGuess(guess){
 }
 function loseGame(){
     document.getElementById("answer").innerHTML = "😥 " + apiRes.song + " 😥";
+    localStorage.setItem("twordle-completed-on-" + todayDateKey, guessNumber+1);
+    document.getElementById("skip-button").style.display="block";
 }
 
 function clearInput(){
@@ -99,9 +113,33 @@ function constructHTMLStrings(){
     for(let p=0;p<lyricArr[i].length;p++){
         hiddenText+="*";
     }
-    displayStrings.push("<span class='hidden' data-index=" + i + ">" + hiddenText + "</span>");
+    displayStrings.push("<span class='hidden word' data-index=" + i + ">" + hiddenText + "</span>");
    }
    displayStrings.map((elem) => {document.getElementById("lyric-block").innerHTML+=(elem +" ")});
+   showLevel();
+}
+function alreadyCompletedDisplay(completedOnGuess){
+    if(completedOnGuess<5){
+        guessNumber = completedOnGuess;
+        constructHTMLStrings();
+        var buttons = document.getElementsByClassName("guess-score-widget");
+        for(let i=0;i<(guessNumber);i++){
+            buttons[i].style.backgroundColor = "red";
+        }
+        buttons[guessNumber].style.backgroundColor = "green";
+        document.getElementById("answer").innerHTML =  "🤩 " + apiRes.song + " 🤩";
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+
+    }
+    else{
+       
+    }
+    document.getElementById("previous-guess-block").style.display = "none";
+    document.getElementById("skip-button").style.display="block";
 }
 export {
     submitGuess,
