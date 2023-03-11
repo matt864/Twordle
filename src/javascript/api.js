@@ -23,6 +23,7 @@ window.addEventListener("load",prepGame());
 function prepGame(){
     window.setTimeout(function(){
         todayDateKey = new Date().toISOString().split("T")[0];
+        document.getElementsByTagName("h1")[0].innerHTML+= " " + todayDateKey;
         const alreadyCompleted = localStorage.getItem("twordle-completed-on-" + todayDateKey);
         const data = readyToGo[todayDateKey];
         apiRes = data;
