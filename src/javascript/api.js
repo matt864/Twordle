@@ -83,6 +83,7 @@ function winGame(){
       });
       localStorage.setItem("twordle-completed-on-" + todayDateKey, guessNumber);
       document.getElementById("skip-button").style.display="block";
+      document.getElementById("input-holder").style.display = "none";
     }
 
 function incorrectGuess(guess){
@@ -103,6 +104,7 @@ function loseGame(){
     document.getElementById("answer").innerHTML = "😥 " + apiRes.song + " 😥";
     localStorage.setItem("twordle-completed-on-" + todayDateKey, guessNumber+1);
     document.getElementById("skip-button").style.display="block";
+    document.getElementById("input-holder").style.display = "none";
 }
 
 function clearInput(){
@@ -120,6 +122,7 @@ function constructHTMLStrings(){
    showLevel();
 }
 function alreadyCompletedDisplay(completedOnGuess){
+    document.getElementById("input-holder").style.display = "none";
     if(completedOnGuess<5){
         guessNumber = completedOnGuess;
         constructHTMLStrings();
