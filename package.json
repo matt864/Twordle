@@ -1,6 +1,6 @@
 {
-  "homepage" : "https://matt864.github.io/twordle",
-  "name": "twordle",
+  "homepage" : "https://matt864.github.io/Twordle",
+  "name": "Twordle",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
